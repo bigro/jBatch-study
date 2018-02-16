@@ -12,6 +12,11 @@ jBatchのお勉強だよ。
 - JBeret（WildFly）
 - SpringBatch
 
+## 詳しいこと
+[Wiki](https://github.com/bigro/jBatch-study/wiki)参照。
+
+基本的にJSRをGoogle翻訳にかけただけです。
+
 ## 参考サイト
 - https://builder.japan.zdnet.com/sp_oracle/35080452/
 - https://www.slideshare.net/agetsuma/jbatch-jdt2015
