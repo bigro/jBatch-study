@@ -4,5 +4,4 @@ jBatchのお勉強だよ。
 
 ## jBatchとは
 - Java EE 7で初めて導入されたバッチ処理の標準仕様
-- もともとSpringBatchが存在して、それを参考にして仕様化したのがjBatch。
-- 
+- もともとSpringBatchが存在して、それを参考にして仕様化したのがjBatch
