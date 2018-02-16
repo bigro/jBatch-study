@@ -10,3 +10,8 @@ jBatchのお勉強だよ。
 - RI（GlassFish）
 - JBeret（WildFly）
 - SpringBatch
+
+## 参考サイト
+- https://builder.japan.zdnet.com/sp_oracle/35080452/
+- https://www.slideshare.net/agetsuma/jbatch-jdt2015
+- https://qiita.com/Hoshito/items/541c97c538bd45134c36
