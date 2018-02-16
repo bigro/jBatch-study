@@ -13,7 +13,7 @@ jBatchのお勉強だよ。
 - SpringBatch
 
 ## 詳しいこと
-[Wiki](https://github.com/bigro/jBatch-study/wiki)参照。
+[Wiki](https://github.com/bigro/jBatch-study/wiki) 参照
 
 基本的にJSRをGoogle翻訳にかけただけです。
 
