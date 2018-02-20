@@ -31,15 +31,15 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
         if(jobExecution.getStatus() == BatchStatus.COMPLETED) {
             log.info("!!! JOB FINISHED! Time to verify the results");
 
-            List<Person> results = jdbcTemplate.query("SELECT first_name, last_name FROM people_upper_case", new RowMapper<Person>() {
+            List<Status> results = jdbcTemplate.query("SELECT status FROM status_after", new RowMapper<Status>() {
                 @Override
-                public Person mapRow(ResultSet rs, int row) throws SQLException {
-                    return new Person(rs.getString(1), rs.getString(2));
+                public Status mapRow(ResultSet rs, int row) throws SQLException {
+                    return new Status(rs.getString(1));
                 }
             });
 
-            for (Person person : results) {
-                log.info("Found <" + person + "> in the database.");
+            for (Status status : results) {
+                log.info("Found <" + status + "> in the database.");
             }
 
         }

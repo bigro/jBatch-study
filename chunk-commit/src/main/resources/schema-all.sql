@@ -1,14 +1,12 @@
-DROP TABLE IF EXISTS people;
-DROP TABLE IF EXISTS people_upper_case;
+DROP TABLE IF EXISTS status;
+DROP TABLE IF EXISTS status_after;
 
-CREATE TABLE people  (
+CREATE TABLE status  (
     person_id SERIAL NOT NULL PRIMARY KEY,
-    first_name VARCHAR(20),
-    last_name VARCHAR(20)
+    status VARCHAR(20)
 );
 
-CREATE TABLE people_upper_case  (
+CREATE TABLE status_after  (
     person_id SERIAL NOT NULL PRIMARY KEY,
-    first_name VARCHAR(20),
-    last_name VARCHAR(20)
+    status VARCHAR(20)
 );

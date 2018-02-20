@@ -2,7 +2,7 @@ package hello;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.batch.MyBatisBatchItemWriter;
-import org.mybatis.spring.batch.MyBatisPagingItemReader;
+import org.mybatis.spring.batch.MyBatisCursorItemReader;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -12,9 +12,6 @@ import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Configuration
 @EnableBatchProcessing
@@ -26,50 +23,28 @@ public class BatchConfiguration {
     @Autowired
     public StepBuilderFactory stepBuilderFactory;
 
-    // ページ単位での取得
     @Bean
-    public MyBatisPagingItemReader<Person> reader(SqlSessionFactory sqlSessionFactory) {
-        MyBatisPagingItemReader<Person> reader = new MyBatisPagingItemReader<>();
+    public MyBatisCursorItemReader<Status> reader(SqlSessionFactory sqlSessionFactory) {
+        MyBatisCursorItemReader<Status> reader = new MyBatisCursorItemReader<>();
         reader.setSqlSessionFactory(sqlSessionFactory);
+        reader.setQueryId(StatusMapper.class.getName() + ".selectAll");
 
-        // firstNameで検索。
-        Map<String, Object> parameter = new HashMap<>();
-        parameter.put("firstName", "Jill");
-        reader.setParameterValues(parameter);
-        reader.setQueryId(PersonMapper.class.getName() + ".selectPage");
-
-        // 全件取得。15件取得できるのでsetPageSizeの動作を確認したい時はこっち。
-//        reader.setQueryId(PersonMapper.class.getName() + ".selectPageAll");
-
-        reader.setPageSize(5);
         return reader;
     }
 
-    // カーソルでの取得
-//    @Bean
-//    public MyBatisCursorItemReader<Person> reader(SqlSessionFactory sqlSessionFactory) {
-//        MyBatisCursorItemReader<Person> reader = new MyBatisCursorItemReader<>();
-//        reader.setSqlSessionFactory(sqlSessionFactory);
-//        reader.setQueryId(PersonMapper.class.getName() + ".selectAll");
-//
-//        return reader;
-//    }
-
     @Bean
-    public PersonItemProcessor processor() {
-        return new PersonItemProcessor();
+    public StatusItemProcessor processor() {
+        return new StatusItemProcessor();
     }
 
     @Bean
-    public MyBatisBatchItemWriter<Person> writer(SqlSessionFactory sqlSessionFactory) {
-        MyBatisBatchItemWriter<Person> writer = new MyBatisBatchItemWriter<>();
+    public MyBatisBatchItemWriter<Status> writer(SqlSessionFactory sqlSessionFactory) {
+        MyBatisBatchItemWriter<Status> writer = new MyBatisBatchItemWriter<>();
         writer.setSqlSessionFactory(sqlSessionFactory);
-        writer.setStatementId(PersonMapper.class.getName() + ".insert");
+        writer.setStatementId(StatusMapper.class.getName() + ".insert");
         return writer;
     }
-    // end::readerwriterprocessor[]
 
-    // tag::jobstep[]
     @Bean
     public Job importUserJob(JobCompletionNotificationListener listener, SqlSessionFactory sqlSessionFactory) {
         return jobBuilderFactory.get("importUserJob")
@@ -83,7 +58,7 @@ public class BatchConfiguration {
     @Bean
     public Step step1(SqlSessionFactory sqlSessionFactory) {
         return stepBuilderFactory.get("step1")
-                .<Person, Person>chunk(5)
+                .<Status, Status>chunk(5)
                 .reader(reader(sqlSessionFactory))
                 .processor(processor())
                 .writer(writer(sqlSessionFactory))

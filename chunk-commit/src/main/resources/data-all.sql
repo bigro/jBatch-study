@@ -1,16 +1,10 @@
-INSERT INTO people  ( first_name, last_name ) VALUES
-('Jill','Doe'),
-('Joe','Doe'),
-('Justin','Doe'),
-('Jane','Doe'),
-('John','Doe'),
-('Jill','Doe'),
-('Joe','Doe'),
-('Justin','Doe'),
-('Jane','Doe'),
-('John','Doe'),
-('Jill','Doe'),
-('Joe','Doe'),
-('Justin','Doe'),
-('Jane','Doe'),
-('John','Doe');
+INSERT INTO status  ( status ) VALUES
+('success'),
+('success'),
+('success'),
+('success'),
+('success'),
+('success'),
+('success'),
+('success'),
+('failed');
