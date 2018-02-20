@@ -12,3 +12,7 @@ chunkのコミット単位を5にして、9件目で例外を発生させる処�
 
 動かすと、最初の5件のみDBに保存されていることが確認できます。
 
+## Batch Checkpoints
+また、例外が発生して異常終了した後にもう一度アプリケーションを起動すると６件目から処理が走っていることがわかります。
+
+これは [Batch Checkpoints](https://github.com/bigro/jBatch-study/wiki/Batch-Checkpoints) の仕様です。
