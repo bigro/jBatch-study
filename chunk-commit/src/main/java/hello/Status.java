@@ -1,6 +1,7 @@
 package hello;
 
 public class Status {
+    private int id;
     private String status;
 
     public Status() {
@@ -13,7 +14,8 @@ public class Status {
     @Override
     public String toString() {
         return "Status{" +
-                "status='" + status + '\'' +
+                "id=" + id +
+                ", status='" + status + '\'' +
                 '}';
     }
 
